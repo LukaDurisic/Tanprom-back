@@ -10,7 +10,6 @@ const Manufacturer = sequelize.define(
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
-      autoIncrement: true
     },
     make: {
       type: DataTypes.STRING,

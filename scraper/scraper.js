@@ -19,7 +19,7 @@ axios.get(url)
 
     // Save the data to a CSV file
     const csvWriter = createCsvWriter({
-      path: 'scraped_data.csv',
+      path: 'category.csv',
       header: [
         { id: 'value', title: 'Value' },
       ],
