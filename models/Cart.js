@@ -1,29 +1,28 @@
-// const { DataTypes, Sequelize } = require("sequelize");
-// const UUID = require('uuid');
+const { DataTypes, Sequelize } = require("sequelize");
+const sequelize = require('../config/db-config')
+const User = require('./User')
 
 
+    const Cart = sequelize.define('cart', {
+        id:{
+            type: Sequelize.UUID,
+            defaultValue:Sequelize.UUIDV4,
+            primaryKey: true,
+            allowNull: false,
+            autoIncrement: true
+        }
+    }, {
+        freezeTableName: true,
+        timestamps: true
+    })
 
-// module.exports = (sequelize, DataTypes) => {
+User.hasOne(Cart);
+Cart.belongsTo(User);
 
-//     const Cart = sequelize.define('cart', {
-//         cart_id:{
-//             type: Sequelize.UUID,
-//             defaultValue:Sequelize.UUIDV4,
-//             primaryKey: true,
-//             allowNull: false
-//         },user_id:{
-//             type: Sequelize.UUID,
-//             defaultValue:Sequelize.UUIDV4,
-//             allowNull: false,
-//             references:{
-//                 model: User,
-//                 key:'id'
-//             }
-//         }
-//     }, {
-//         freezeTableName: true,
-//         timestamps: true
-//     })
+// async function sync() {
+//       await Cart.sync({force: true})
+//   }
 
-//     return Cart
-// }
+//   sync()
+
+    module.exports = Cart

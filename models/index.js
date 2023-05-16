@@ -13,10 +13,16 @@ const db = {};
 db.sequelize = sequelize;
 
 db.models={}
-db.models.User = require('./User')(sequelize,Sequelize.DataTypes)
-db.models.Category = require('./Category')(sequelize,Sequelize.DataTypes)
-db.models.Cart = require('./Cart')(sequelize,Sequelize.DataTypes)
+db.models.User = require('./User')
+db.models.Category = require('./Category')
+db.models.Cart = require('./Cart')
+db.models.Manufacturer = require('./Manufacturer')
+db.models.Part = require('./Part')
+db.models.PartInCart = require('./PartInCart')
 
-db.sequelize.sync()
+// db.models.Manufacturer.sync({alter: true})
+// db.models.Manufacturer.sync({alter: true})
+db.models.PartInCart.sync({alter: true})
+//db.sequelize.sync({alter: true})
 
 module.exports = db;

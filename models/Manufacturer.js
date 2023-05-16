@@ -1,9 +1,9 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/db-config");
-const Category = require('./Category')
+const Part = require('./Part')
 
-const Part = sequelize.define(
-  "part",
+const Manufacturer = sequelize.define(
+  "manufacturer",
   {
     id: {
       type: Sequelize.UUID,
@@ -12,26 +12,31 @@ const Part = sequelize.define(
       allowNull: false,
       autoIncrement: true
     },
-    name: {
+    make: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    avaible: {
-      type: DataTypes.SMALLINT,
+    country: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
+    year: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
   }
 );
 
-Category.hasMany(Part);
-Part.belongsTo(Category);
+Manufacturer.hasMany(Part);
+Part.belongsTo(Manufacturer);
 
-module.exports = Part;
+  // async function sync() {
+  //     await Manufacturer.sync({force: true})
+  // }
+
+  // sync()
+module.exports = Manufacturer ;
