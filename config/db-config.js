@@ -1,14 +1,13 @@
 const mysql = require('mysql2')
+const Sequelize = require('sequelize');
 
 require('dotenv').config();
 
-
-const db = mysql.createPool({
+ /// ovo je isto
+ // tocnije ovo doli je tocan nacin za spajanje na bazu kad se koristi sequelize
+const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
     host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
     dialect: process.env.MYSQL_DIALECT
-});
-
-module.exports = db.promise()
+  });
+  
+module.exports = sequelize;

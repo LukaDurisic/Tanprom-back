@@ -1,13 +1,13 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const UUID = require('uuid')
+const sequelize = require("../config/db-config");
 
-module.exports = (sequelize, DataTypes) => {
     const Category = sequelize.define('category', {
         id:{
             type: Sequelize.UUID,
             defaultValue:Sequelize.UUIDV4,
             primaryKey: true,
-            allowNull: false
+            allowNull: false,
+            autoIncrement: true
         },
         name: DataTypes.STRING
     }, {
@@ -15,5 +15,4 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 
-    return Category
-}
+    module.exports = Category

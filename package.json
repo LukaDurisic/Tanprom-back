@@ -17,6 +17,6 @@
     "nodemon": "^2.0.22",
     "routes": "^2.1.0",
     "sequelize": "^6.31.1",
-    "uuid": "^9.0.0"
+    "sequelize-cli": "^6.6.0"
   }
 }
