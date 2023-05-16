@@ -7,7 +7,6 @@ const sequelize = require("../config/db-config");
             defaultValue:Sequelize.UUIDV4,
             primaryKey: true,
             allowNull: false,
-            autoIncrement: true
         },
         name: DataTypes.STRING
     }, {
