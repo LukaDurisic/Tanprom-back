@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const partRoutes = require("./modules/routes/partRoutes");
+const partRoutes = require("./modules/routes/partRoute");
 
 app.use("/", partRoutes);
 
