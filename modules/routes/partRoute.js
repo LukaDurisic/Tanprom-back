@@ -1,7 +1,7 @@
 const express = require("express");
 // const getAllParts = require("../data/getAllParts.js");
 // const getAvailableParts = require("../data/getAvailableParts.js");
-const getPartManufacturer = require('../data/getPartManufacturer')
+const getPartManufacturer = require("../data/getPartManufacturer");
 
 const router = express.Router();
 
