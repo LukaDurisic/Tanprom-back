@@ -7,7 +7,6 @@ async function userRegister(username, password) {
       password: password,
     });
 
-    console.log("User registered:", newUser);
   } catch (err) {
     console.log(err);
   }

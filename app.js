@@ -3,7 +3,7 @@ const app = express();
 const partRoutes = require("./modules/routes/partRoute");
 const userRoutes = require("./modules/routes/userRoute");
 
-app.use(express.json())
+app.use(express.json());
 
 app.use("/part/", partRoutes);
 app.use("/user/", userRoutes);

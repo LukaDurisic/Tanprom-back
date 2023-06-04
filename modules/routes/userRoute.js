@@ -1,16 +1,11 @@
 const express = require("express");
-const userRegister = require("../data/userRegister");
+const userRegister = require("../data/userQuery");
 
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body.username);
-    // console.log(req.body.password);
-
     const user = { username: req.body.username, password: req.body.password };
-
-    console.log(user);
 
     await userRegister(user.username, user.password);
 
