@@ -1,19 +1,8 @@
 const express = require("express");
-const userRegister = require("../data/userQuery");
+const register = require('../controllers/register')
 
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
-  try {
-    const user = { username: req.body.username, password: req.body.password };
-
-    await userRegister(user.username, user.password);
-
-    res.status(201).send("Data sent");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+router.post("/register",register);
 
 module.exports = router;

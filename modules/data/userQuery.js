@@ -12,4 +12,6 @@ async function userRegister(username, password) {
   }
 }
 
-module.exports = userRegister;
+module.exports = {
+  userRegister: userRegister
+}
