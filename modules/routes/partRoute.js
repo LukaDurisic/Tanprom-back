@@ -1,10 +1,8 @@
 const express = require("express");
-// const getAllParts = require("../data/getAllParts.js");
-// const getAvailableParts = require("../data/getAvailableParts.js");
 const { getPartManufacturer,getAllParts } = require("../data/partQuery");
 
 const router = express.Router();
-
+//test
 router.get("/", async (req, res) => {
   const data = await getPartManufacturer;
   res.send(data);
