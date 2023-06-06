@@ -6,12 +6,21 @@ async function userRegister(username, password) {
       username: username,
       password: password,
     });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
+async function getUsers() {
+  try {
+    const data = await User.findAll({ attributes: ["username", "password"] });
+    return data;
   } catch (err) {
     console.log(err);
   }
 }
 
 module.exports = {
-  userRegister: userRegister
-}
+  userRegister: userRegister,
+  getUsers: getUsers,
+};
