@@ -24,8 +24,9 @@ db.models.Part = require("./Part");
 db.models.PartInCart = require("./PartInCart");
 
 // db.models.Manufacturer.sync({alter: true})
-// db.models.User.sync({ alter : true });
-// db.models.PartInCart.sync({alter: true})
-//db.sequelize.sync({alter: true})
+// db.models.User.sync({ force : true })
+db.models.Cart.sync({ alter: true })
+db.models.PartInCart.sync({force: true})
+// db.sequelize.sync({alter: true})
 
 module.exports = db;

@@ -4,20 +4,23 @@ const sequelize = require("../../shared/config/db-config");
 const User = sequelize.define(
   "user",
   {
-    id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+    firebaseUID: {
+      type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
     },
     username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    firebaseUID: DataTypes.STRING,
-  },
-  {
-    freezeTableName: true,
-    timestamps: true,
-  }
-);
+    }, {
+        freezeTableName: true,
+        timestamps:true
+    })
 
-module.exports = User;
+  //   async function sync() {
+  //     await User.sync({force: true})
+  // }
+
+  // sync()
+
+  
+
+    module.exports = User
