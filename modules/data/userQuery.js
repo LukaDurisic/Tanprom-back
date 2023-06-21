@@ -1,10 +1,11 @@
 const User = require("../models/User");
 
-async function userRegister(username, password) {
+async function userRegister(username, password,uid) {
   try {
     const newUser = await User.create({
       username: username,
       password: password,
+      firebaseUID: uid,
     });
   } catch (err) {
     console.log(err);
