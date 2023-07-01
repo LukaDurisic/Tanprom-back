@@ -1,5 +1,5 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const sequelize = require('../config/db-config')
+const sequelize = require('../../shared/config/db-config')
 const User = require('./User')
 
 
@@ -8,21 +8,20 @@ const User = require('./User')
             type: Sequelize.UUID,
             defaultValue:Sequelize.UUIDV4,
             primaryKey: true,
-            allowNull: false,
-            autoIncrement: true
+            allowNull: false
         }
     }, {
         freezeTableName: true,
         timestamps: true
     })
 
-User.hasOne(Cart);
-Cart.belongsTo(User);
+User.hasOne(Cart, {foreignKey: 'firebaseUID'});
+Cart.belongsTo(User, {foreignKey: 'firebaseUID'});
 
-// async function sync() {
-//       await Cart.sync({force: true})
-//   }
+async function sync() {
+      await Cart.sync({force: true})
+  }
 
-//   sync()
+  sync()
 
     module.exports = Cart

@@ -5,19 +5,26 @@ const firebaseApp = require("../../shared/config/firebase");
 const auth = getAuth(firebaseApp);
 
 const register = async (req, res) => {
+  let uid;
   try {
     const user = { username: req.body.username, password: req.body.password };
-
-    await userRegister(user.username, user.password);
 
     createUserWithEmailAndPassword(auth, user.username, user.password)
       .then((userCredential) => {
         const user = userCredential.user;
+        uid = user.uid;
+
+        processUid();
       })
       .catch((err) => {
         console.log(err.code);
         console.log(err.message);
       });
+
+    async function processUid() {
+      console.log(uid);
+      await userRegister(uid, user.username);
+    }
 
     res.status(201).send("Data sent");
   } catch (error) {
