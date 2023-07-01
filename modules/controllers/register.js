@@ -7,12 +7,13 @@ const auth = getAuth(firebaseApp);
 const register = async (req, res) => {
   let uid;
   try {
-    const user = { username: req.body.username };
+    const user = { username: req.body.username, password: req.body.password };
 
-    createUserWithEmailAndPassword(auth, user.username)
+    createUserWithEmailAndPassword(auth, user.username, user.password)
       .then((userCredential) => {
         const user = userCredential.user;
         uid = user.uid;
+
         processUid();
       })
       .catch((err) => {
@@ -22,7 +23,7 @@ const register = async (req, res) => {
 
     async function processUid() {
       console.log(uid);
-      await userRegister(user.username, uid);
+      await userRegister(uid, user.username);
     }
 
     res.status(201).send("Data sent");
