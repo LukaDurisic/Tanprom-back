@@ -3,6 +3,7 @@ const {
   getPartManufacturer,
   getAllParts,
   filterPartsByName,
+  getUnavailableParts,
 } = require("../data/partQuery");
 
 const router = express.Router();
@@ -20,6 +21,11 @@ router.get("/all", async (req, res) => {
 router.get("/all/:name", async (req, res) => {
   const name = req.params.name;
   const data = await filterPartsByName(name);
+  res.send(data);
+});
+
+router.get("/unavailable", async (req, res) => {
+  const data = await getUnavailableParts;
   res.send(data);
 });
 
