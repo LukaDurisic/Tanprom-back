@@ -50,8 +50,28 @@ async function getPartManufacturer() {
   }
 }
 
+async function filterPartsByName(name){
+  try{
+
+    const data = await Part.findAll({
+      attributes: ["name", "price", "available"],
+      include: {
+        model: Manufacturer,
+        where: {
+          make: name,
+        },
+      },
+    });
+    return data;
+
+  }catch(err){
+    console.log(err)
+  }
+}
+
 module.exports = {
   getAllParts: getAllParts(),
   getAvaibleParts: getAvailableParts(),
   getPartManufacturer: getPartManufacturer(),
+  filterPartsByName : filterPartsByName
 };
