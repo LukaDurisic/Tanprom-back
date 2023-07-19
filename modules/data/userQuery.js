@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 
 async function userRegister(uid, username) {
   try {
@@ -6,22 +7,24 @@ async function userRegister(uid, username) {
       firebaseUID: uid,
       username: username,
     });
-    console.log('User created')
+    console.log("User created");
   } catch (err) {
     console.log(err);
   }
 }
 
-// async function getUsers() {
-//   try {
-//     const data = await User.findAll({ attributes: ["username", "password"] });
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+async function createCart(uid) {
+  try {
+    const newCart = await Cart.create({
+      firebaseUID: uid,
+    });
+    console.log("cart created");
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 module.exports = {
   userRegister: userRegister,
-  // getUsers: getUsers,
+  createCart: createCart
 };

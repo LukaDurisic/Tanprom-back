@@ -18,10 +18,10 @@ const User = require('./User')
 User.hasOne(Cart, {foreignKey: 'firebaseUID'});
 Cart.belongsTo(User, {foreignKey: 'firebaseUID'});
 
-async function sync() {
-      await Cart.sync({force: true})
-  }
+// async function sync() {
+//       await Cart.sync({force: true})
+//   }
 
-  sync()
+//   sync()
 
     module.exports = Cart
