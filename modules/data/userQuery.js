@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Cart = require("../models/Cart");
+const PartInCart = require("../models/PartInCart");
 
 async function userRegister(uid, username) {
   try {
@@ -24,7 +25,21 @@ async function createCart(uid) {
   }
 }
 
+async function addPartInCart(cartid, partid, quantity) {
+  try {
+    const addPart = await PartInCart.create({
+      cart_id: cartid,
+      part_id: partid,
+      quantity: quantity,
+    });
+    console.log("part added");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   userRegister: userRegister,
-  createCart: createCart
+  createCart: createCart,
+  addPartInCart: addPartInCart,
 };

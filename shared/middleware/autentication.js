@@ -1,30 +1,27 @@
-const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
-const mysql = require("mysql2");
-const firebaseApp = require("../../shared/config/firebase");
-const { getUsers } = require("../data/userQuery");
+const jwt = require("jsonwebtoken");
 
-const auth = getAuth(firebaseApp);
-
-const login = async (req, res) => {
+const authentication = async (req, res,next) => {
   try {
-    const email = req.body.username;
-    const password = req.body.password;
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    const cart = req.body.cartUserID;
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        res.send(user.accessToken);
-      })
-      .catch((err) => {
-        console.log(err.code);
-        console.log(err.message);
-      });
+    if (token == null)
+      return res
+        .status(401)
+        .json({ message: "Not allowed", error: error.message });
 
-      
+    const decodedToken = jwt.decode(token);
+
+    if (decodedToken.user_id === cart) {
+      next();
+    } else {
+      res.status(403).send("Failed to authenticate");
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Login failed", error: error.message });
+    res.status(500).json({ message: "Not allowed", error: error.message });
   }
 };
 
-module.exports = login;
+module.exports = authentication;
