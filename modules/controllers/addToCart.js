@@ -1,5 +1,5 @@
 const PartInCart = require("../models/PartInCart");
-const { addPartInCart } = require("../data/userQuery");
+const { addPartInCart,refreshQuantity } = require("../data/userQuery");
 // const Part = require("../models/Part");
 // const Cart = require("../models/Cart");
 
@@ -10,6 +10,7 @@ const addToCart = async (req, res) => {
     const quantity = req.body.quantity;
 
     await addPartInCart(cartid, partid, quantity);
+    await refreshQuantity(partid,quantity)
 
     res.send("Part added");
   } catch (error) {

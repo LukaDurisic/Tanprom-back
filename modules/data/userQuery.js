@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Cart = require("../models/Cart");
 const PartInCart = require("../models/PartInCart");
+const Part = require("../models/Part");
 
 async function userRegister(uid, username) {
   try {
@@ -38,8 +39,20 @@ async function addPartInCart(cartid, partid, quantity) {
   }
 }
 
+async function refreshQuantity(partid, quantity) {
+  Part.findByPk(partid).then((prt) => {
+    if (prt) {
+      prt.available = prt.available - quantity;
+      prt.save();
+    } else {
+      console.log("User not found!");
+    }
+  });
+}
+
 module.exports = {
   userRegister: userRegister,
   createCart: createCart,
   addPartInCart: addPartInCart,
+  refreshQuantity: refreshQuantity,
 };
