@@ -1,22 +1,31 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../../shared/config/db-config");
-const Category = require('./Category')
-const Manufacturer = require('./Manufacturer')
+const User = require("../models/User")
+const Part = require("../models/Part")
 
-const Part = sequelize.define(
-  "part",
+const SoldPart = sequelize.define(
+  "sold_part",
   {
-    id: {
+    part_id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
+      references:{
+        model:Part,
+        key:"id"
+      }
     },
-    name: {
+    user_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
+      references:{
+        model:User,
+        key:"firebaseUId"
+      }
     },
-    available: {
+    quantity: {
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
@@ -31,9 +40,10 @@ const Part = sequelize.define(
   }
 );
 
-Manufacturer.hasMany(Part);
-Part.belongsTo(Manufacturer);
-Category.hasMany(Part);
-Part.belongsTo(Category);
+async function sync() {
+      await SoldPart.sync({alter: true})
+  }
 
-module.exports = Part;
+  sync()
+
+module.exports = SoldPart;
