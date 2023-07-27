@@ -1,4 +1,4 @@
-const { userRegister } = require("../data/userQuery");
+const { userRegister, createCart } = require("../data/userQuery");
 const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
 const firebaseApp = require("../../shared/config/firebase");
 
@@ -15,6 +15,7 @@ const register = async (req, res) => {
         uid = user.uid;
 
         processUid();
+        cartCreating();
       })
       .catch((err) => {
         console.log(err.code);
@@ -24,6 +25,11 @@ const register = async (req, res) => {
     async function processUid() {
       console.log(uid);
       await userRegister(uid, user.username);
+    }
+
+    async function cartCreating() {
+      console.log(uid);
+      await createCart(uid);
     }
 
     res.status(201).send("Data sent");

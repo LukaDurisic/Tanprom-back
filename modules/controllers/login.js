@@ -1,7 +1,6 @@
 const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
 const mysql = require("mysql2");
 const firebaseApp = require("../../shared/config/firebase");
-const { getUsers } = require("../data/userQuery");
 
 const auth = getAuth(firebaseApp);
 
