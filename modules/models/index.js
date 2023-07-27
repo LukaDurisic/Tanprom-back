@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const config = require('../../shared/config/db-config');
+const config = require("../../shared/config/db-config");
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -22,11 +22,12 @@ db.models.Cart = require("./Cart");
 db.models.Manufacturer = require("./Manufacturer");
 db.models.Part = require("./Part");
 db.models.PartInCart = require("./PartInCart");
+db.models.SoldPart = require("./SoldPart");
 
 // db.models.Manufacturer.sync({alter: true})
 // db.models.User.sync({ force : true })
-db.models.Cart.sync({ alter: true })
-db.models.PartInCart.sync({force: true})
-// db.sequelize.sync({alter: true})
+db.models.SoldPart.sync({ force: true });
+// db.models.Part.sync({ force: true });
+db.sequelize.sync({force: true})
 
 module.exports = db;
