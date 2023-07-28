@@ -26,8 +26,8 @@ db.models.SoldPart = require("./SoldPart");
 
 // db.models.Manufacturer.sync({alter: true})
 // db.models.User.sync({ force : true })
-db.models.SoldPart.sync({ force: true });
+// db.models.SoldPart.sync({ force: true });
 // db.models.Part.sync({ force: true });
 db.sequelize.sync({force: true})
 
-module.exports = db;
+module.exports = db,sequelize;

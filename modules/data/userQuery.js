@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Cart = require("../models/Cart");
 const PartInCart = require("../models/PartInCart");
 const Part = require("../models/Part");
+const SoldPart = require("../models/SoldPart");
 
 async function userRegister(uid, username) {
   try {
@@ -29,7 +30,7 @@ async function createCart(uid) {
 async function addPartInCart(cartid, partid, quantity) {
   try {
     const adding = await refreshQuantity(partid, quantity);
-    if(adding != 0){
+    if (adding != 0) {
       const addPart = await PartInCart.create({
         cart_id: cartid,
         part_id: partid,
@@ -60,9 +61,35 @@ async function refreshQuantity(partid, quantity) {
   });
 }
 
+async function removePart(cartid, partid) {
+  try {
+    await PartInCart.destroy({ where: { cart_id: cartid, part_id: partid } });
+    console.log("User deleted successfully");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function addToSold(partid, userid, quantity) {
+  const price = await Part.findByPk(partid).then((prt) => {
+    if (prt) {
+      return prt.price;
+    }
+  });
+
+  await SoldPart.create({
+    part_id: partid,
+    user_id: userid,
+    quantity: quantity,
+    price: price,
+  });
+}
+
 module.exports = {
   userRegister: userRegister,
   createCart: createCart,
   addPartInCart: addPartInCart,
   refreshQuantity: refreshQuantity,
+  addToSold: addToSold,
+  removePart: removePart,
 };
