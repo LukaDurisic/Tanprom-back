@@ -35,10 +35,10 @@ const SoldPart = sequelize.define(
   }
 );
 
-async function sync() {
-      await SoldPart.sync({alter: true})
-  }
+// async function sync() {
+//       await SoldPart.sync({alter: true})
+//   }
 
-  sync()
+//   sync()
 
 module.exports = SoldPart;

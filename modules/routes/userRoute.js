@@ -1,9 +1,9 @@
 const express = require("express");
-const register = require("../controllers/register");
-const login = require("../controllers/login");
-const addToCart = require("../controllers/addToCart");
+const register = require("../controllers/userControllers/register");
+const login = require("../controllers/userControllers/login");
+const addToCart = require("../controllers/userControllers/addToCart");
 const authentication = require("../../shared/middleware/autentication");
-const buy = require("../controllers/buy");
+const buy = require("../controllers/userControllers/buy");
 
 const router = express.Router();
 

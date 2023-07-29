@@ -61,7 +61,7 @@ async function refreshQuantity(partid, quantity) {
   });
 }
 
-async function removePart(cartid, partid) {
+async function removePart(cartid, partid,t) {
   try {
     await PartInCart.destroy({ where: { cart_id: cartid, part_id: partid } });
     console.log("User deleted successfully");
@@ -70,7 +70,7 @@ async function removePart(cartid, partid) {
   }
 }
 
-async function addToSold(partid, userid, quantity) {
+async function addToSold(partid, userid, quantity,t) {
   const price = await Part.findByPk(partid).then((prt) => {
     if (prt) {
       return prt.price;

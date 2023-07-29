@@ -1,5 +1,5 @@
-const { removePart, addToSold } = require("../data/userQuery");
-const {sequelize} = require("../models/index.js");
+const { removePart, addToSold } = require("../../data/userQuery");
+const {sequelize} = require("../../models/index.js");
 
 const buy = async (req, res) => {
   const partid = req.body.partID;

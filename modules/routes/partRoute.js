@@ -1,32 +1,14 @@
 const express = require("express");
-const {
-  getPartManufacturer,
-  getAllParts,
-  filterPartsByName,
-  getUnavailableParts,
-} = require("../data/partQuery");
+const getPartMan = require("../controllers/partControllers/getPartManufacturer");
+const getAll = require("../controllers/partControllers/getAll");
+const getUnavailable = require("../controllers/partControllers/getUnavailable");
+const filterPartsByName = require("../controllers/partControllers/filterPartsByName");
 
 const router = express.Router();
-//test
-router.get("/", async (req, res) => {
-  const data = await getPartManufacturer;
-  res.send(data);
-});
 
-router.get("/all", async (req, res) => {
-  const data = await getAllParts;
-  res.send(data);
-});
-
-router.get("/all/:name", async (req, res) => {
-  const name = req.params.name;
-  const data = await filterPartsByName(name);
-  res.send(data);
-});
-
-router.get("/unavailable", async (req, res) => {
-  const data = await getUnavailableParts;
-  res.send(data);
-});
+router.get("/", getPartMan);
+router.get("/all", getAll);
+router.get("/all/:name", filterPartsByName);
+router.get("/unavailable", getUnavailable);
 
 module.exports = router;
