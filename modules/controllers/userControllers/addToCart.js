@@ -1,5 +1,5 @@
-const PartInCart = require("../models/PartInCart");
-const { addPartInCart } = require("../data/userQuery");
+const PartInCart = require("../../models/PartInCart");
+const { addPartInCart } = require("../../data/userQuery");
 // const Part = require("../models/Part");
 // const Cart = require("../models/Cart");
 

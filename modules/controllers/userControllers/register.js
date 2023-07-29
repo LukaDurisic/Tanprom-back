@@ -1,6 +1,6 @@
-const { userRegister, createCart } = require("../data/userQuery");
+const { userRegister, createCart } = require("../../data/userQuery");
 const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
-const firebaseApp = require("../../shared/config/firebase");
+const firebaseApp = require("../../../shared/config/firebase");
 
 const auth = getAuth(firebaseApp);
 
@@ -9,26 +9,22 @@ const register = async (req, res) => {
   try {
     const user = { username: req.body.username, password: req.body.password };
 
-    createUserWithEmailAndPassword(auth, user.username, user.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        uid = user.uid;
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      user.username,
+      user.password
+    );
+    const newUser = userCredential.user;
+    uid = newUser.uid;
 
-        processUid();
-        cartCreating();
-      })
-      .catch((err) => {
-        console.log(err.code);
-        console.log(err.message);
-      });
+    await processUid();
+    await cartCreating();
 
     async function processUid() {
-      console.log(uid);
       await userRegister(uid, user.username);
     }
 
     async function cartCreating() {
-      console.log(uid);
       await createCart(uid);
     }
 

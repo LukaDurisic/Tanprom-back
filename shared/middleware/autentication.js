@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../config/admin");
 
-const authentication = async (req, res,next) => {
+const authentication = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -10,6 +11,8 @@ const authentication = async (req, res,next) => {
       return res
         .status(401)
         .json({ message: "Not allowed", error: error.message });
+
+    await verifyToken(token);
 
     const decodedToken = jwt.decode(token);
 
